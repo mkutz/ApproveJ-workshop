@@ -10,7 +10,10 @@ testcontainers = "1.21.3"
 
 [libraries]
 approvej-core = { module = "org.approvej:core", version.ref = "approvej" }
+approvej-json-jackson = { module = "org.approvej:json-jackson", version.ref = "approvej" }
+approvej-yaml-jackson = { module = "org.approvej:yaml-jackson", version.ref = "approvej" }
 assertj-core = { module = "org.assertj:assertj-core", version.ref = "assertj" }
+awaitility-kotlin = { module = "org.awaitility:awaitility-kotlin", version = "4.3.0" }
 datasource-proxy = { module = "net.ttddyy:datasource-proxy", version = "1.8" }
 jackson-module-kotlin = { module = "com.fasterxml.jackson.module:jackson-module-kotlin", version.ref = "jackson" }
 junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher", version.ref = "junit" }
@@ -21,6 +24,9 @@ spring-boot-starter-data-jpa = { module = "org.springframework.boot:spring-boot-
 spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test" }
 spring-boot-starter-web = { module = "org.springframework.boot:spring-boot-starter-web" }
 spring-boot-testcontainers = { module = "org.springframework.boot:spring-boot-testcontainers" }
+spring-kafka = { module = "org.springframework.kafka:spring-kafka" }
+spring-kafka-test = { module = "org.springframework.kafka:spring-kafka-test" }
+stubit-random = { module = "org.stubit:random", version = "0.9.2" }
 testcontainers-junit-jupiter = { module = "org.testcontainers:junit-jupiter", version.ref = "testcontainers" }
 testcontainers-kafka = { module = "org.testcontainers:kafka", version.ref = "testcontainers" }
 testcontainers-postgresql = { module = "org.testcontainers:postgresql", version.ref = "testcontainers" }

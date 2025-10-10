@@ -20,15 +20,19 @@ dependencies {
   implementation(libs.kotlin.reflect)
   implementation(libs.spring.boot.starter.data.jpa)
   implementation(libs.spring.boot.starter.web)
+  implementation(libs.spring.kafka)
 
   runtimeOnly(libs.postgresql)
 
-  testImplementation(libs.spring.boot.starter.test) { exclude(group = "junit", module = "junit") }
-  testImplementation(libs.spring.boot.testcontainers)
-  testImplementation(libs.approvej.core)
+  testImplementation(libs.approvej.json.jackson)
   testImplementation(libs.assertj.core)
+  testImplementation(libs.awaitility.kotlin)
   testImplementation(libs.datasource.proxy)
   testImplementation(libs.kotlin.test.junit5)
+  testImplementation(libs.spring.boot.starter.test)
+  testImplementation(libs.spring.boot.testcontainers)
+  testImplementation(libs.spring.kafka.test)
+  testImplementation(libs.stubit.random)
   testImplementation(libs.testcontainers.junit.jupiter)
   testImplementation(libs.testcontainers.kafka)
   testImplementation(libs.testcontainers.postgresql)

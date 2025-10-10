@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean
 import org.testcontainers.containers.PostgreSQLContainer
 import org.testcontainers.containers.wait.strategy.Wait.forListeningPort
 import org.testcontainers.junit.jupiter.Testcontainers
+import org.testcontainers.kafka.KafkaContainer
 import org.testcontainers.utility.DockerImageName
 
 @Testcontainers
@@ -16,4 +17,6 @@ class TestcontainersConfiguration {
   @ServiceConnection
   fun postgresContainer(): PostgreSQLContainer<*> =
     PostgreSQLContainer(DockerImageName.parse("postgres:latest")).waitingFor(forListeningPort())
+
+  @Bean @ServiceConnection fun kafkaContainer() = KafkaContainer("apache/kafka-native:latest")
 }
