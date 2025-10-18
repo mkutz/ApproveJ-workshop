@@ -1,4 +1,7 @@
 # ApproveJ Workshop
+[![Build](https://github.com/mkutz/approvej-workshop/actions/workflows/build-main.yml/badge.svg)](https://github.com/mkutz/approvej-workshop/actions/workflows/build-main.yml)
+[![Sonar Quality Gate](https://img.shields.io/sonar/quality_gate/mkutz_ApproveJ-workshop?server=https%3A%2F%2Fsonarcloud.io)](https://sonarcloud.io/dashboard?id=mkutz_ApproveJ-workshop)
+[![Sonar Coverage](https://img.shields.io/sonar/coverage/mkutz_ApproveJ-workshop?server=http%3A%2F%2Fsonarcloud.io)](https://sonarcloud.io/dashboard?id=mkutz_ApproveJ-workshop)
 
 Workshop material for learning ApproveJ.org.
 
