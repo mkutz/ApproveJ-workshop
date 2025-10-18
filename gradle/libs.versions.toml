@@ -14,7 +14,7 @@ approvej-json-jackson = { module = "org.approvej:json-jackson", version.ref = "a
 approvej-yaml-jackson = { module = "org.approvej:yaml-jackson", version.ref = "approvej" }
 assertj-core = { module = "org.assertj:assertj-core", version.ref = "assertj" }
 awaitility-kotlin = { module = "org.awaitility:awaitility-kotlin", version = "4.3.0" }
-datasource-proxy = { module = "net.ttddyy:datasource-proxy", version = "1.8" }
+datasource-proxy = { module = "net.ttddyy:datasource-proxy", version = "1.11.0" }
 jackson-module-kotlin = { module = "com.fasterxml.jackson.module:jackson-module-kotlin", version.ref = "jackson" }
 junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher", version.ref = "junit" }
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect" }
