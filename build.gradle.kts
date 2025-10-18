@@ -1,9 +1,11 @@
 plugins {
+  jacoco
   alias(libs.plugins.kotlin.jvm)
   alias(libs.plugins.kotlin.spring)
   alias(libs.plugins.spring.boot)
   alias(libs.plugins.spring.dependency.management)
   alias(libs.plugins.kotlin.jpa)
+  alias(libs.plugins.sonar)
   alias(libs.plugins.spotless)
 }
 
@@ -49,6 +51,16 @@ allOpen {
 }
 
 tasks.withType<Test> { useJUnitPlatform() }
+
+tasks.jacocoTestReport { reports { xml.required = true } }
+
+sonar {
+  properties {
+    property("sonar.projectKey", "mkutz_ApproveJ-workshop")
+    property("sonar.organization", "mkutz")
+    property("sonar.host.url", "https://sonarcloud.io")
+  }
+}
 
 spotless {
   format("misc") {
