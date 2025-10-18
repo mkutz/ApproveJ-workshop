@@ -81,7 +81,7 @@ class ArticleConsumerTest(
   fun consumeArticle_tombstone() {
     val storedArticle = articleStore.storeArticle(anArticle().build())
 
-    kafkaTemplate.send("article", "${storedArticle.id}", null)
+    kafkaTemplate.send("article", "${storedArticle.id}", null).get()
 
     await().untilAsserted { assertThat(articleStore.getArticleById(storedArticle.id)).isNull() }
   }
