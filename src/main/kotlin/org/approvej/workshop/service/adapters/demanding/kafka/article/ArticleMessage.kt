@@ -4,7 +4,6 @@ import java.math.BigDecimal
 import java.util.UUID
 import org.approvej.workshop.service.application.article.Article
 import org.approvej.workshop.service.application.article.Article.Quantity
-import org.approvej.workshop.service.application.article.InvalidQuantityStringException
 
 data class ArticleMessage(
   val id: String,

@@ -1,4 +1,4 @@
-package org.approvej.workshop.service.application.article
+package org.approvej.workshop.service.adapters.demanding.kafka.article
 
 import java.lang.RuntimeException
 
