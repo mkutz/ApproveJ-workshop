@@ -27,10 +27,10 @@ data class ArticleMessage(
         "^(?<value>\\d+(\\.\\d+)?)\\s*(?<unit>\\w+)?$"
           .toRegex(RegexOption.IGNORE_CASE)
           .find(quantityPerUnit)
-          ?.let<MatchResult, Quantity> {
+          ?.let {
             Quantity(
               BigDecimal(it.groups["value"]?.value),
-              Article.QuantityUnit.forSymbol(it.groups["unit"]?.value),
+              Article.QuantityUnit.forSymbol(it.groups["unit"]?.value ?: ""),
             )
           } ?: throw InvalidQuantityStringException(quantityPerUnit),
     )

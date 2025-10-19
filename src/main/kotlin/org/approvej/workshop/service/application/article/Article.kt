@@ -27,8 +27,9 @@ data class Article(
     PIECE("");
 
     companion object {
-      fun forSymbol(symbol: String?): QuantityUnit =
-        entries.find { it.symbol.equals(symbol, true) } ?: PIECE
+      fun forSymbol(symbol: String): QuantityUnit =
+        entries.find { it.symbol.equals(symbol, true) }
+          ?: throw UnknownQuantityUnitException(symbol)
     }
   }
 }

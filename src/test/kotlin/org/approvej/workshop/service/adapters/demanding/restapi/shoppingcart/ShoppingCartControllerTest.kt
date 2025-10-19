@@ -7,6 +7,7 @@ import java.net.http.HttpClient
 import java.net.http.HttpRequest.BodyPublishers
 import java.net.http.HttpRequest.newBuilder
 import java.net.http.HttpResponse.BodyHandlers
+import java.util.UUID.randomUUID
 import org.approvej.workshop.TestcontainersConfiguration
 import org.approvej.workshop.service.adapters.demanding.restapi.toCents
 import org.approvej.workshop.service.application.article.ArticleBuilder.Companion.anArticle
@@ -91,6 +92,17 @@ class ShoppingCartControllerTest(
   }
 
   @Test
+  fun get_existing_shopping_cart_unknown_id() {
+    val response =
+      httpClient.send(
+        newBuilder(URI("$baseUrl/shopping-cart/${randomUUID()}")).GET().build(),
+        BodyHandlers.ofString(),
+      )
+
+    assertThat(response.statusCode()).isEqualTo(404)
+  }
+
+  @Test
   fun post_shopping_cart_items() {
     val existingShoppingCart = shoppingCartStore.storeShoppingCart(aShoppingCart().build())
     val article = articleStore.storeArticle(anArticle().build())
@@ -121,5 +133,40 @@ class ShoppingCartControllerTest(
     assertThat(receivedShoppingCart.items[0].pricePerUnit).isEqualTo(article.pricePerUnit.toCents())
     assertThat(receivedShoppingCart.items[0].priceTotal)
       .isEqualTo(article.pricePerUnit.toCents() * quantity)
+  }
+
+  @Test
+  fun post_shopping_cart_items_unknown_shopping_cart() {
+    val unknownShoppingCartId = randomUUID()
+    val article = articleStore.storeArticle(anArticle().build())
+
+    val response =
+      httpClient.send(
+        newBuilder(URI("$baseUrl/shopping-cart/$unknownShoppingCartId/items"))
+          .POST(BodyPublishers.ofString("""{"articleId":"${article.id}","quantity": 1}"""))
+          .header("Content-Type", "application/json")
+          .build(),
+        BodyHandlers.ofString(),
+      )
+
+    assertThat(response.statusCode()).isEqualTo(404)
+  }
+
+  @Test
+  fun post_shopping_cart_items_unknown_article() {
+    val existingShoppingCart = shoppingCartStore.storeShoppingCart(aShoppingCart().build())
+    val unknownArticleId = randomUUID()
+
+    val response =
+      httpClient.send(
+        newBuilder(URI("$baseUrl/shopping-cart/${existingShoppingCart.id}/items"))
+          .POST(BodyPublishers.ofString("""{"articleId":"${unknownArticleId}","quantity": 1}"""))
+          .header("Content-Type", "application/json")
+          .build(),
+        BodyHandlers.ofString(),
+      )
+
+    assertThat(response.statusCode()).isEqualTo(400)
+    assertThat(response.body()).isEqualTo("Unknown article $unknownArticleId")
   }
 }
