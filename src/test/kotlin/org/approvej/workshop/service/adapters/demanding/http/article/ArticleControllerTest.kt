@@ -1,4 +1,4 @@
-package org.approvej.workshop.service.adapters.demanding.restapi.article
+package org.approvej.workshop.service.adapters.demanding.http.article
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
@@ -8,7 +8,7 @@ import java.net.http.HttpRequest.newBuilder
 import java.net.http.HttpResponse
 import java.util.UUID
 import org.approvej.workshop.TestcontainersConfiguration
-import org.approvej.workshop.service.adapters.demanding.restapi.toCents
+import org.approvej.workshop.service.adapters.demanding.http.toCents
 import org.approvej.workshop.service.application.article.ArticleBuilder.Companion.anArticle
 import org.approvej.workshop.service.application.article.ToStoreArticles
 import org.assertj.core.api.Assertions.assertThat

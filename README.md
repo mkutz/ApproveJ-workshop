@@ -15,6 +15,60 @@ In order to fulfill the following objectives, you will need
 - an IDE like IntelliJ IDEA
 
 
+## Code Base
+
+This code base is a basic Spring Boot service written in Kotlin, built with Gradle.
+
+The main purpose of the service is to provide an _API for creating virtual shopping carts and fill them with items_.
+These items need to represent a valid article.
+Articles are managed by some other service, which shares the article master data via a Kafka topic.
+The service also provides another API to look for articles.
+
+
+### Structure
+
+Its structure is a simple version of [Hexagonal Architecture](https://en.wikipedia.org/wiki/Hexagonal_architecture_(software)).
+
+It features [three adapters, which demand services from the application](src/main/kotlin/org/approvej/workshop/service/adapters/demanding):
+
+- an HTTP API controller to look up article data,
+- another HTTP API to manage shopping carts, and
+- a Kafka consumer to import articles.
+
+There are [two adapters, which provide services to the application](src/main/kotlin/org/approvej/workshop/service/adapters/providing):
+
+- a database adapter to store articles,
+- another database adapter to store shopping carts.
+
+The [application](src/main/kotlin/org/approvej/workshop/service/application) contains two domains:
+
+- articles, and
+- shopping carts.
+
+
+### Tests
+
+The tests are generally written as [sociable unit tests](https://martinfowler.com/bliki/UnitTest.html#SolitaryOrSociable).
+
+Those [tests for the application](src/test/kotlin/org/approvej/workshop/service/application) code are using self-written stubs of the two providing ports to not require an application context or mocking.
+
+Some of the [adapter tests](src/test/kotlin/org/approvej/workshop/service/adapters) rely on Spring Boot and Testcontainers to mitigate risks of framework and infrastructure integration.
+
+
+### Formatting
+
+Note that this code base uses [Spotless](https://github.com/diffplug/spotless/tree/main/plugin-gradle) to format and verify formatting.
+So, wrong formatting can fail Gradle's `check` task.
+
+You can automatically reformat the code by running
+
+```bash
+./gradlew spotlessApply
+```
+
+If you prefer to rely on your IDEs formatting, feel free to remove the `spotless` configuration from the [build.gradle.kts](build.gradle.kts).
+
+
 ## Objectives
 
 ### Setup
@@ -27,9 +81,9 @@ In order to fulfill the following objectives, you will need
   ./gradlew check
   ```
 
-- [ ] Execute a simple application unit test class like [ArticleImporterTest](src/test/kotlin/org/approvej/workshop/service/application/article/ArticleImporterTest.kt) via you IDE.
+- [ ] Execute a simple application unit test class like [ArticleManagerTest](src/test/kotlin/org/approvej/workshop/service/application/article/ArticleManagerTest.kt) via you IDE.
 
-- [ ] Execute an adapter integration tests like [ShoppingCartControllerApiTest](src/test/kotlin/org/approvej/workshop/service/adapters/demanding/restapi/shoppingcart/ShoppingCartControllerApiTest.kt).
+- [ ] Execute an adapter integration tests like [ShoppingCartControllerTest](src/test/kotlin/org/approvej/workshop/service/adapters/demanding/http/shoppingcart/ShoppingCartControllerTest.kt).
 
 
 ### Approving vs Asserting String Results
@@ -39,7 +93,7 @@ As approving the result as whole, in contrast to asserting single aspects of it,
 
 For the following objectives, you will need knowledge from the ApproveJ manual chapter [Approve Strings](https://approvej.org/#approve_strings).
 
-- [ ] Take a look at the [ArticleControllerTest](src/test/kotlin/org/approvej/workshop/service/adapters/demanding/restapi/article/ArticleControllerTest.kt).
+- [ ] Take a look at the [ArticleControllerTest](src/test/kotlin/org/approvej/workshop/service/adapters/demanding/http/article/ArticleControllerTest.kt).
 
   The test contains a lot of assertions that specify the result body in quite some detail.
 
@@ -96,7 +150,7 @@ That could be IDs of any kind, timestamps, dates etc.
 
 To deal with such problems, ApproveJ comes with a feature called [Scrubbing](https://approvej.org/#scrubbing).
 
-- [ ] Take a look at the [ShoppingCartControllerApiTest](src/test/kotlin/org/approvej/workshop/service/adapters/demanding/restapi/shoppingcart/ShoppingCartControllerTest.kt).
+- [ ] Take a look at the [ShoppingCartControllerApiTest](src/test/kotlin/org/approvej/workshop/service/adapters/demanding/http/shoppingcart/ShoppingCartControllerTest.kt).
 
   Again, try to replace the assertions on the first test case with `approval(response.body()).printWith(jsonStringPrettyPrinter()).byFile()`.
 
@@ -109,7 +163,7 @@ To deal with such problems, ApproveJ comes with a feature called [Scrubbing](htt
 
 - [ ] Try to replace the other test cases' assertions with the same approval.
 
-- [ ] Figure out why the tests fail and chose one of the [Scrubbers](https://approvej.org/javadoc/core/org/approvej/scrub/Scrubbers.html) to deal with the remaining dynamic values.
+- [ ] Figure out why the tests fail and chose one of the [built-in Scrubbers](https://approvej.org/#_built_in_scrubbers_replacements) to deal with the remaining dynamic values.
 
 - [ ] Again, compare the approved file with the original assertions.
 
@@ -119,24 +173,24 @@ To deal with such problems, ApproveJ comes with a feature called [Scrubbing](htt
 So far, we only looked at API tests whose results are basically strings.
 But ApproveJ also allows to [approve any kind of plain old Java object (POJO)](https://approvej.org/#approve_pojos).
 
-- [ ] The [ArticleDtoTest](src/test/kotlin/org/approvej/workshop/service/adapters/demanding/restapi/article/ArticleDtoTest.kt) checks the mapping between the `Article` and the `ArticleDto` class.
+- [ ] The [ArticleDtoTest](src/test/kotlin/org/approvej/workshop/service/adapters/demanding/http/article/ArticleDtoTest.kt) checks the mapping between the `Article` and the `ArticleDto` class.
   Again, this takes quite a lot of assertions.
   Try to replace it with an approval.
 
 - [ ] The received file again contains the result object in a single line, which makes it hard to overlook differences.
 
   ApproveJ offers a variate of Printers to turn POJOs into readable strings.
-  The most basic one would be the [`ObjectPrinter`](https://approvej.org/javadoc/core/org/approvej/print/ObjectPrinter.html), but you can also choose the [`JsonPrettyPrinter`](https://approvej.org/javadoc/json-jackson/org/approvej/json/jackson/JsonPrettyPrinter.html), or the [`YamlPrinter`](https://approvej.org/javadoc/yaml-jackson/org/approvej/yaml/jackson/YamlPrinter.html), or use a custom implementation of the `Printer` interface.
+  The most basic one would be the [generic `ObjectPrinter`](https://approvej.org/#_generic_object_printer), but you can also choose the [`JsonPrettyPrinter`](https://approvej.org/#_pretty_print_json_strings), or the [`YamlPrinter`](https://approvej.org/#_print_as_yaml), or use a [custom printer](https://approvej.org/#custom_printer_implementation).
 
   Choose one option and re-run the test.
 
 - [ ] Again, we are faced with some dynamic values in the result that keep the test from succeeding.
 
-  The `uuids()` scrubber reduces the problem, but won't suffice this time.
-  Maybe the [`stringsMatching(pattern)`](https://approvej.org/javadoc/core/org/approvej/scrub/Scrubbers.html#stringsMatching(java.lang.String)) could be used, or the [`strings(string…)`](https://approvej.org/javadoc/core/org/approvej/scrub/Scrubbers.html#strings(java.lang.String,java.lang.String...)) could also be an option, or you could write your very own custom [`Scrubber<ArticelDto>`](https://approvej.org/#_custom_scrubber)?
+  [Built-in scrubbers](https://approvej.org/#_built_in_scrubbers_replacements) like the [`uuids()`](https://approvej.org/javadoc/core/org/approvej/scrub/Scrubbers.html#uuids()) scrubber reduces the problem, but won't suffice this time.
+  Maybe the [`stringsMatching(pattern)`](https://approvej.org/javadoc/core/org/approvej/scrub/Scrubbers.html#stringsMatching(java.lang.String)) could be used, or the [`strings(string…)`](https://approvej.org/javadoc/core/org/approvej/scrub/Scrubbers.html#strings(java.lang.String,java.lang.String...)) could also be an option, or you could write your very own [custom `Scrubber<ArticelDto>`](https://approvej.org/#_custom_scrubber)?
 
   Maybe you can also find a way to avoid scrubbing at all?
 
-- [ ] Apply the same to the [ItemDtoTest](src/test/kotlin/org/approvej/workshop/service/adapters/demanding/restapi/shoppingcart/ItemDtoTest.kt).
+- [ ] Apply the same to the [ItemDtoTest](src/test/kotlin/org/approvej/workshop/service/adapters/demanding/http/shoppingcart/ItemDtoTest.kt).
 
   Here, you won't be able to avoid applying one of the [Scrubbers](https://approvej.org/javadoc/core/org/approvej/scrub/Scrubbers.html).

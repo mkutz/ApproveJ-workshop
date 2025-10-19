@@ -1,6 +1,5 @@
-package org.approvej.workshop.service.adapters.demanding.restapi.shoppingcart
+package org.approvej.workshop.service.adapters.demanding.http.shoppingcart
 
-import com.fasterxml.jackson.databind.ObjectMapper
 import java.util.*
 import org.approvej.workshop.service.application.shoppingcart.ShoppingCartManager
 import org.approvej.workshop.service.application.shoppingcart.ShoppingCartNotFoundException
@@ -21,10 +20,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("shopping-cart")
-class ShoppingCartController(
-  private val shoppingCartManager: ShoppingCartManager,
-  private val objectMapper: ObjectMapper,
-) {
+class ShoppingCartController(private val shoppingCartManager: ShoppingCartManager) {
 
   @GetMapping
   fun getNewShoppingCart(): ResponseEntity<ShoppingCartDto> =

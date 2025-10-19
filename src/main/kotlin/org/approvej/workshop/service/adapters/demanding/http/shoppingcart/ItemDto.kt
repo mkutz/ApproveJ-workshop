@@ -1,8 +1,8 @@
-package org.approvej.workshop.service.adapters.demanding.restapi.shoppingcart
+package org.approvej.workshop.service.adapters.demanding.http.shoppingcart
 
 import java.math.BigDecimal
 import java.time.Instant
-import org.approvej.workshop.service.adapters.demanding.restapi.toCents
+import org.approvej.workshop.service.adapters.demanding.http.toCents
 import org.approvej.workshop.service.application.shoppingcart.Item
 
 data class ItemDto(

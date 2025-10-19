@@ -1,4 +1,4 @@
-package org.approvej.workshop.service.adapters.demanding.restapi.article
+package org.approvej.workshop.service.adapters.demanding.http.article
 
 import org.approvej.workshop.service.application.article.ToStoreArticles
 import org.springframework.web.bind.annotation.GetMapping

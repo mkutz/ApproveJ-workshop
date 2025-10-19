@@ -1,9 +1,8 @@
-package org.approvej.workshop.service.adapters.demanding.restapi.shoppingcart
+package org.approvej.workshop.service.adapters.demanding.http.shoppingcart
 
-import org.approvej.workshop.service.adapters.demanding.restapi.toCents
+import org.approvej.workshop.service.adapters.demanding.http.toCents
 import org.approvej.workshop.service.application.shoppingcart.ItemBuilder.Companion.anItem
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
 class ItemDtoTest {

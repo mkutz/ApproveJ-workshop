@@ -1,4 +1,4 @@
-package org.approvej.workshop.service.adapters.demanding.restapi
+package org.approvej.workshop.service.adapters.demanding.http
 
 import java.math.BigDecimal
 import java.math.RoundingMode

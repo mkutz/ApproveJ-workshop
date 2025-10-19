@@ -1,4 +1,4 @@
-package org.approvej.workshop.service.adapters.demanding.restapi.article
+package org.approvej.workshop.service.adapters.demanding.http.article
 
 import org.approvej.workshop.service.application.article.ArticleBuilder.Companion.anArticle
 import org.assertj.core.api.Assertions.assertThat
