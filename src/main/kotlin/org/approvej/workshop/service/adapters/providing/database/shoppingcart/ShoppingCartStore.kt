@@ -15,13 +15,13 @@ import org.springframework.stereotype.Component
 class ShoppingCartStore(private val shoppingCartRepository: ShoppingCartRepository) :
   ToStoreShoppingCarts {
 
-  override fun getShoppingCart(shoppingCartId: UUID): ShoppingCart? =
-    shoppingCartRepository.findByIdOrNull(shoppingCartId)?.toShoppingCart()
-
   override fun storeShoppingCart(shoppingCart: ShoppingCart): ShoppingCart {
     shoppingCartRepository.save(ShoppingCartEntity(shoppingCart))
     return shoppingCart
   }
+
+  override fun getShoppingCart(shoppingCartId: UUID): ShoppingCart? =
+    shoppingCartRepository.findByIdOrNull(shoppingCartId)?.toShoppingCart()
 
   @Transactional
   override fun addItem(shoppingCartId: UUID, item: Item): Result<ShoppingCart> {

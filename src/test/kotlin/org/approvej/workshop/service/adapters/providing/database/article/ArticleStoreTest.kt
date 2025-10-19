@@ -21,16 +21,16 @@ class ArticleStoreTest(@param:Autowired private val articleStore: ToStoreArticle
     val storedArticle = articleStore.storeArticle(article)
 
     assertThat(storedArticle).isEqualTo(article)
-    assertThat(articleStore.getArticleById(article.id)).isNotNull()
+    assertThat(articleStore.getArticleById(article.id)).isEqualTo(article)
   }
 
   @Test
   fun getArticleById() {
-    val storedArticleEntity = articleStore.storeArticle(anArticle().build())
+    val storedArticle = articleStore.storeArticle(anArticle().build())
 
-    val gottenArticle = articleStore.getArticleById(storedArticleEntity.id)
+    val gottenArticle = articleStore.getArticleById(storedArticle.id)
 
-    assertThat(gottenArticle).isNotNull()
+    assertThat(gottenArticle).isEqualTo(storedArticle)
   }
 
   @Test
