@@ -11,13 +11,11 @@ class ShoppingCartTest {
 
   @Test
   fun `value multiple items`() {
-    // tag::simple_assertion[]
     val item1 = anItem().article(anArticle().price("2.5").build()).quantity(1).build()
     val item2 = anItem().article(anArticle().price("7.5").build()).quantity(1).build()
     val shoppingCart = ShoppingCart(randomUUID(), listOf(item1, item2))
 
     assertThat(shoppingCart.value).isEqualTo(item1.priceTotal.plus(item2.priceTotal))
-    // end::simple_assertion[]
   }
 
   @Test

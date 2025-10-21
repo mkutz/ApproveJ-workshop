@@ -4,6 +4,7 @@ import org.approvej.workshop.service.application.article.Article
 import org.approvej.workshop.service.application.article.ArticleBuilder.Companion.anArticle
 
 class ItemBuilder private constructor() {
+
   var article: Article = anArticle().build()
   var quantity: Int = 1
 
