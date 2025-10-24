@@ -26,6 +26,7 @@ dependencies {
   runtimeOnly(libs.postgresql)
 
   testImplementation(libs.approvej.json.jackson)
+  testImplementation(libs.approvej.yaml.jackson)
   testImplementation(libs.assertj.core)
   testImplementation(libs.awaitility.kotlin)
   testImplementation(libs.datasource.proxy)

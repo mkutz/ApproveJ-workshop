@@ -1,6 +1,11 @@
 package org.approvej.workshop.service.adapters.demanding.http.shoppingcart
 
+import org.approvej.ApprovalBuilder.approve
+import org.approvej.print.ObjectPrinter.objectPrinter
+import org.approvej.scrub.Scrubbers.isoDateTimes
+import org.approvej.scrub.Scrubbers.uuids
 import org.approvej.workshop.service.adapters.demanding.http.toCents
+import org.approvej.workshop.service.application.article.articleNumbers
 import org.approvej.workshop.service.application.shoppingcart.ItemBuilder.Companion.anItem
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
@@ -24,5 +29,12 @@ class ItemDtoTest {
     assertThat(dto.quantityTotalValue).isEqualTo(item.quantityTotal.value)
     assertThat(dto.quantityUnitSymbol).isEqualTo(item.quantityPerUnit.unit.symbol)
     assertThat(dto.insertionTime).isEqualTo(item.insertionTime)
+
+    approve(dto)
+      .printWith(objectPrinter())
+      .scrubbedOf(uuids())
+      .scrubbedOf(isoDateTimes())
+      .scrubbedOf(articleNumbers())
+      .byFile()
   }
 }
