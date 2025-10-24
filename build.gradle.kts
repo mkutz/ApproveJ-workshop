@@ -9,8 +9,6 @@ plugins {
   alias(libs.plugins.spotless)
 }
 
-java { toolchain { languageVersion = JavaLanguageVersion.of(21) } }
-
 repositories { mavenCentral() }
 
 ext["junit-jupiter.version"] = libs.versions.junit.get()
@@ -42,12 +40,9 @@ dependencies {
   testRuntimeOnly(libs.junit.platform.launcher)
 }
 
-kotlin { compilerOptions { freeCompilerArgs.addAll("-Xjsr305=strict") } }
-
-allOpen {
-  annotation("jakarta.persistence.Entity")
-  annotation("jakarta.persistence.MappedSuperclass")
-  annotation("jakarta.persistence.Embeddable")
+kotlin {
+  jvmToolchain(21)
+  compilerOptions { freeCompilerArgs.addAll("-Xjsr305=strict") }
 }
 
 tasks.withType<Test> { useJUnitPlatform() }
