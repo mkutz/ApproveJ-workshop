@@ -71,7 +71,7 @@ If you prefer to rely on your IDEs formatting, feel free to remove the `spotless
 
 ## Objectives
 
-### Setup
+### 🚧 Setup
 
 - [ ] Checkout the code of this repository and load it in your IDE.
 
@@ -86,7 +86,7 @@ If you prefer to rely on your IDEs formatting, feel free to remove the `spotless
 - [ ] Execute an adapter integration tests like [ShoppingCartControllerTest](src/test/kotlin/org/approvej/workshop/service/adapters/demanding/http/shoppingcart/ShoppingCartControllerTest.kt).
 
 
-### Approving vs Asserting String Results
+### 👍 Approving vs 🔬 Asserting String Results
 
 Approval testing is particularly useful for tests with a lot of assertions on a single result objects.
 As approving the result as whole, in contrast to asserting single aspects of it, makes the test less bloated, confusing and concise.
@@ -112,7 +112,7 @@ For the following objectives, you will need knowledge from the ApproveJ manual c
   This time it should be successful and the received file should automatically be removed.
 
 
-### Pretty Printing
+### 🖨️ Pretty Printing
 
 Now the content of the approved file is not exactly great to read.
 A change in the content of the last returned article might easily be overlooked.
@@ -141,7 +141,7 @@ Let's change that by applying proper [printing](https://approvej.org/#printing) 
   The assertion on the response code might still be useful.
 
 
-### Scrubbing Dynamic Data from Results
+### 🧽 Scrubbing Dynamic Data from Results
 
 Note that so far the results must be very static.
 The test arranges the test data in a way, that the result contains no dynamic value.
@@ -179,7 +179,7 @@ To deal with such problems, ApproveJ comes with a feature called [Scrubbing](htt
   Remove the assertions.
 
 
-### Approving & Scrubbing POJO Results
+### ☕️ Approving & Scrubbing POJO Results
 
 So far, we only looked at API tests whose results are basically strings.
 But ApproveJ also allows to [approve any kind of plain old Java object (POJO)](https://approvej.org/#approve_pojos).
@@ -205,3 +205,26 @@ But ApproveJ also allows to [approve any kind of plain old Java object (POJO)](h
 - [ ] Apply the same to the [ItemDtoTest](src/test/kotlin/org/approvej/workshop/service/adapters/demanding/http/shoppingcart/ItemDtoTest.kt).
 
   Here, you won't be able to avoid applying one of the [Scrubbers](https://approvej.org/javadoc/core/org/approvej/scrub/Scrubbers.html).
+
+- [ ] You may find more opportunities to add ApproveJ to further tests.
+  Feel free to try something out.
+
+
+## Conclusion & Outlook
+
+I hope this workshop was beneficial for you and the concept of Approval Testing in general and ApproveJ are clear to you and you will be able to apply it in you daily work.
+We've seen how Approval Testing can solve the issue of long assertion blocks on single objects.
+This makes the test code and the results easier to understand.
+It reduces the risk of oversights in writing detailed assertions.
+
+We mostly applied it here to adapter tests for API code.
+One could say that this is a form of contract verification.
+But so far, we only looked into the demanding adapter code, even tough contracts exists on the providing side as well.
+
+Right after the release of v1.0, I will try to extend the feature set of ApproveJ into that direction.
+There are already experiments going on to allow approving produced Kafka messages, outgoing HTTP requests, and even database queries that are produced by the application.
+
+If you have further ideas how ApproveJ could evolve, please do contact me.
+If your idea is concrete and small enough, consider [filing an issue](https://github.com/mkutz/ApproveJ/issues/new/choose).
+
+Happy coding 🚀
