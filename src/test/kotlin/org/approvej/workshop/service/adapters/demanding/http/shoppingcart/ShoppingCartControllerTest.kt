@@ -130,7 +130,7 @@ class ShoppingCartControllerTest(
     val response =
       httpClient.send(
         newBuilder(URI("$baseUrl/shopping-cart/${existingShoppingCart.id}/items"))
-          .POST(BodyPublishers.ofString("""{"articleId":"${unknownArticleId}","quantity": 1}"""))
+          .POST(BodyPublishers.ofString("""{"articleId":"$unknownArticleId","quantity": 1}"""))
           .header("Content-Type", "application/json")
           .build(),
         BodyHandlers.ofString(),
