@@ -130,11 +130,9 @@ Let's change that by applying proper [printing](https://approvej.org/#printing) 
 
   This time the diff view opens for two new files: `ArticleControllerTest-get_articles-received.json` and `ArticleControllerTest-get_articles-approved.json`.
   Note that applying the printer changed the filename extension automatically.
-  The old `txt` files can be removed.
 
 - [ ] Approve the received and rerun the test.
   It should succeed now.
-  Note that you can now remove the leftover `txt` file.
 
 - [ ] Compare the approved file's content with the original assertions.
   Were there any oversights?
