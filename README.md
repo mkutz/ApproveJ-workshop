@@ -206,8 +206,10 @@ But ApproveJ also allows to [approve any kind of plain old Java object (POJO)](h
 
   Here, you won't be able to avoid applying one of the [Scrubbers](https://approvej.org/javadoc/core/org/approvej/scrub/Scrubbers.html).
 
-- [ ] You may find more opportunities to add ApproveJ to further tests.
-  Feel free to try something out.
+
+### 💽 Approving SQL Queries
+
+- [ ] Have a look at the [ShoppingCartStoreTest](src/test/kotlin/org/approvej/workshop/service/adapters/providing/database/shoppingcart/ShoppingCartStoreTest.kt)
 
 
 ## Conclusion & Outlook
