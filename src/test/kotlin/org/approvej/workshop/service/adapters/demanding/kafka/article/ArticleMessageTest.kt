@@ -6,7 +6,6 @@ import org.approvej.workshop.service.application.article.Article
 import org.approvej.workshop.service.application.article.UnknownQuantityUnitException
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
-import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
 class ArticleMessageTest {
@@ -40,7 +39,7 @@ class ArticleMessageTest {
   }
 
   @Test
-  fun toArticle_invalid_quantity_string() {
+  fun `toArticle invalid quantity string`() {
     val message = validMessage.copy(quantityPerUnit = "a lot")
 
     assertThatThrownBy { message.toArticle() }
@@ -49,7 +48,7 @@ class ArticleMessageTest {
   }
 
   @Test
-  fun toArticle_unknown_quantity_unit() {
+  fun `toArticle unknown quantity unit`() {
     val message = validMessage.copy(quantityPerUnit = "1t")
 
     assertThatThrownBy { message.toArticle() }

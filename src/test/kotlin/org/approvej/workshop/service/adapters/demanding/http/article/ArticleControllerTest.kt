@@ -29,7 +29,7 @@ class ArticleControllerTest(
   val httpClient: HttpClient = HttpClient.newHttpClient()
 
   @Test
-  fun get_articles() {
+  fun `get articles`() {
     val query = "ACME"
     val matchingArticles =
       listOf(

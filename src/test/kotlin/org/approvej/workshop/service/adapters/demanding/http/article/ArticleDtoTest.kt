@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test
 class ArticleDtoTest {
 
   @Test
-  fun constructor_article() {
+  fun `constructor article`() {
     val article = anArticle().build()
 
     val dto = ArticleDto(article)

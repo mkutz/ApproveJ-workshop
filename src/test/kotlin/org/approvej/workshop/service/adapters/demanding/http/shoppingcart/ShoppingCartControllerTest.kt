@@ -34,7 +34,7 @@ class ShoppingCartControllerTest(
   val httpClient: HttpClient = HttpClient.newHttpClient()
 
   @Test
-  fun get_new_shopping_cart() {
+  fun `get new shopping cart`() {
     val response =
       httpClient.send(
         newBuilder(URI("$baseUrl/shopping-cart")).GET().build(),
@@ -50,7 +50,7 @@ class ShoppingCartControllerTest(
   }
 
   @Test
-  fun get_existing_shopping_cart() {
+  fun `get existing shopping cart`() {
     val existingShoppingCart =
       shoppingCartStore.storeShoppingCart(
         aShoppingCart().items(anItem().build(), anItem().build()).build()
@@ -92,7 +92,7 @@ class ShoppingCartControllerTest(
   }
 
   @Test
-  fun get_existing_shopping_cart_unknown_id() {
+  fun `get existing shopping cart unknown id`() {
     val response =
       httpClient.send(
         newBuilder(URI("$baseUrl/shopping-cart/${randomUUID()}")).GET().build(),
@@ -103,7 +103,7 @@ class ShoppingCartControllerTest(
   }
 
   @Test
-  fun post_shopping_cart_items() {
+  fun `post shopping cart items`() {
     val existingShoppingCart = shoppingCartStore.storeShoppingCart(aShoppingCart().build())
     val article = articleStore.storeArticle(anArticle().build())
     val quantity = 2
@@ -136,7 +136,7 @@ class ShoppingCartControllerTest(
   }
 
   @Test
-  fun post_shopping_cart_items_unknown_shopping_cart() {
+  fun `post shopping cart items unknown shopping cart`() {
     val unknownShoppingCartId = randomUUID()
     val article = articleStore.storeArticle(anArticle().build())
 
@@ -153,7 +153,7 @@ class ShoppingCartControllerTest(
   }
 
   @Test
-  fun post_shopping_cart_items_unknown_article() {
+  fun `post shopping cart items unknown article`() {
     val existingShoppingCart = shoppingCartStore.storeShoppingCart(aShoppingCart().build())
     val unknownArticleId = randomUUID()
 

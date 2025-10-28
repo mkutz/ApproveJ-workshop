@@ -34,7 +34,7 @@ class ShoppingCartStoreTest(@param:Autowired private val shoppingCartStore: Shop
   }
 
   @Test
-  fun getShoppingCart_unknown() {
+  fun `getShoppingCart unknown`() {
     assertThat(shoppingCartStore.getShoppingCart(randomUUID())).isNull()
   }
 

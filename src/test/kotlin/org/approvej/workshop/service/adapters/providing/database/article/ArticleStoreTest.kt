@@ -34,7 +34,7 @@ class ArticleStoreTest(@param:Autowired private val articleStore: ToStoreArticle
   }
 
   @Test
-  fun getArticleById_unknown() {
+  fun `getArticleById unknown`() {
     assertThat(articleStore.getArticleById(randomUUID())).isNull()
   }
 

@@ -44,7 +44,7 @@ class ArticleConsumerTest(
   }
 
   @Test
-  fun consumeArticle_invalid() {
+  fun `consumeArticle invalid`() {
     val invalidArticleId = randomUUID()
     val invalidArticleMessage =
       """
@@ -78,7 +78,7 @@ class ArticleConsumerTest(
   }
 
   @Test
-  fun consumeArticle_tombstone() {
+  fun `consumeArticle tombstone`() {
     val storedArticle = articleStore.storeArticle(anArticle().build())
 
     kafkaTemplate.send("article", "${storedArticle.id}", null).get()
