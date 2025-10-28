@@ -212,7 +212,7 @@ But ApproveJ also allows to [approve any kind of plain old Java object (POJO)](h
 
 ## Conclusion & Outlook
 
-I hope this workshop was beneficial for you and the concept of Approval Testing in general and ApproveJ are clear to you and you will be able to apply it in you daily work.
+I hope this workshop was beneficial for you and the concept of Approval Testing in general and ApproveJ are clear to you, and you will be able to apply it in you daily work.
 We've seen how Approval Testing can solve the issue of long assertion blocks on single objects.
 This makes the test code and the results easier to understand.
 It reduces the risk of oversights in writing detailed assertions.
