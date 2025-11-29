@@ -7,7 +7,7 @@ import java.net.http.HttpRequest.newBuilder
 import java.net.http.HttpResponse.BodyHandlers
 import java.util.UUID.randomUUID
 import org.approvej.ApprovalBuilder.approve
-import org.approvej.json.jackson.JsonStringPrettyPrinter.jsonStringPrettyPrinter
+import org.approvej.json.jackson.JsonPrintFormat.json
 import org.approvej.scrub.Scrubbers.isoDateTimes
 import org.approvej.scrub.Scrubbers.uuids
 import org.approvej.workshop.TestcontainersConfiguration
@@ -43,7 +43,7 @@ class ShoppingCartControllerTest(
       )
 
     assertThat(response.statusCode()).isEqualTo(200)
-    approve(response.body()).scrubbedOf(uuids()).printWith(jsonStringPrettyPrinter()).byFile()
+    approve(response.body()).scrubbedOf(uuids()).printedAs(json()).byFile()
   }
 
   @Test
@@ -64,7 +64,7 @@ class ShoppingCartControllerTest(
       .scrubbedOf(uuids())
       .scrubbedOf(isoDateTimes())
       .scrubbedOf(articleNumbers())
-      .printWith(jsonStringPrettyPrinter())
+      .printedAs(json())
       .byFile()
   }
 
@@ -101,7 +101,7 @@ class ShoppingCartControllerTest(
       .scrubbedOf(uuids())
       .scrubbedOf(isoDateTimes())
       .scrubbedOf(articleNumbers())
-      .printWith(jsonStringPrettyPrinter())
+      .printedAs(json())
       .byFile()
   }
 

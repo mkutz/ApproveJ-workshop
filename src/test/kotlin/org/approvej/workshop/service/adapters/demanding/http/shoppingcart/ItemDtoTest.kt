@@ -1,7 +1,7 @@
 package org.approvej.workshop.service.adapters.demanding.http.shoppingcart
 
 import org.approvej.ApprovalBuilder.approve
-import org.approvej.print.ObjectPrinter.objectPrinter
+import org.approvej.print.MultiLineStringPrintFormat.multiLineString
 import org.approvej.scrub.Scrubbers.isoDateTimes
 import org.approvej.scrub.Scrubbers.uuids
 import org.approvej.workshop.service.adapters.demanding.http.toCents
@@ -31,7 +31,7 @@ class ItemDtoTest {
     assertThat(dto.insertionTime).isEqualTo(item.insertionTime)
 
     approve(dto)
-      .printWith(objectPrinter())
+      .printedAs(multiLineString())
       .scrubbedOf(uuids())
       .scrubbedOf(isoDateTimes())
       .scrubbedOf(articleNumbers())

@@ -6,7 +6,7 @@ import java.net.http.HttpRequest.newBuilder
 import java.net.http.HttpResponse
 import java.util.UUID
 import org.approvej.ApprovalBuilder.approve
-import org.approvej.json.jackson.JsonStringPrettyPrinter.jsonStringPrettyPrinter
+import org.approvej.json.jackson.JsonPrintFormat.json
 import org.approvej.workshop.TestcontainersConfiguration
 import org.approvej.workshop.service.application.article.ArticleBuilder.Companion.anArticle
 import org.approvej.workshop.service.application.article.ToStoreArticles
@@ -61,6 +61,6 @@ class ArticleControllerTest(
       )
 
     assertThat(response.statusCode()).isEqualTo(200)
-    approve(response.body()).printWith(jsonStringPrettyPrinter()).byFile()
+    approve(response.body()).printedAs(json()).byFile()
   }
 }

@@ -1,7 +1,7 @@
 package org.approvej.workshop.service.adapters.demanding.http.article
 
 import org.approvej.ApprovalBuilder.approve
-import org.approvej.print.ObjectPrinter.objectPrinter
+import org.approvej.print.MultiLineStringPrintFormat.multiLineString
 import org.approvej.scrub.Scrubbers.uuids
 import org.approvej.workshop.service.application.article.ArticleBuilder.Companion.anArticle
 import org.approvej.workshop.service.application.article.articleNumbers
@@ -16,7 +16,7 @@ class ArticleDtoTest {
     val dto = ArticleDto(article)
 
     approve(dto)
-      .printWith(objectPrinter())
+      .printedAs(multiLineString())
       .scrubbedOf(uuids())
       .scrubbedOf(articleNumbers())
       .byFile()
