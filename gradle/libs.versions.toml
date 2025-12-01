@@ -1,5 +1,5 @@
 [versions]
-approvej = "1.0-RC1"
+approvej = "1.0"
 assertj = "3.27.6"
 jackson = "2.20.1"
 junit = "6.0.1"
