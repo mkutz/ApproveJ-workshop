@@ -6,7 +6,7 @@ junit = "6.0.1"
 kotlin = "2.2.21"
 springBoot = "3.5.7"
 springDependencyManagement = "1.1.7"
-testcontainers = "1.21.3"
+testcontainers = "1.21.4"
 
 [libraries]
 approvej-core = { module = "org.approvej:core", version.ref = "approvej" }
