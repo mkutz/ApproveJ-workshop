@@ -1,7 +1,7 @@
 [versions]
 approvej = "1.0"
 assertj = "3.27.6"
-jackson = "2.20.1"
+jackson = "2.21.0"
 junit = "6.0.2"
 kotlin = "2.3.0"
 springBoot = "3.5.7"
