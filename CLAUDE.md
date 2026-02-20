@@ -9,21 +9,22 @@ ApproveJ Workshop — a Spring Boot service (Kotlin) for learning approval testi
 ## Build & Test Commands
 
 ```bash
-./gradlew check              # Full build: compile, test, spotless formatting check
-./gradlew test               # Run all tests only
-./gradlew spotlessApply      # Auto-format all code (ktfmt Google style)
-./gradlew spotlessCheck      # Verify formatting without changing files
-./gradlew jacocoTestReport   # Generate code coverage report (XML)
+mvn verify                   # Full build: compile, test, spotless formatting check
+mvn test                     # Run all tests only
+mvn spotless:apply           # Auto-format all code (ktfmt Google style)
+mvn spotless:check           # Verify formatting without changing files
+mvn jacoco:report            # Generate code coverage report (XML)
+mvn approvej:find-orphans    # Find orphaned approval files
 ```
 
 Run a single test class:
 ```bash
-./gradlew test --tests "org.approvej.workshop.service.application.article.ArticleManagerTest"
+mvn test -Dtest="org.approvej.workshop.service.application.article.ArticleManagerTest"
 ```
 
 Run a single test method:
 ```bash
-./gradlew test --tests "org.approvej.workshop.service.application.article.ArticleManagerTest.some test name"
+mvn test -Dtest="org.approvej.workshop.service.application.article.ArticleManagerTest#some test name"
 ```
 
 **Requirements:** JDK 21, Docker (for TestContainers-based integration tests).
@@ -59,7 +60,7 @@ Tests mirror the source structure under `src/test/kotlin/`.
 
 ## Code Formatting
 
-Spotless enforces ktfmt Google style. Formatting failures break `./gradlew check`. Run `./gradlew spotlessApply` before committing. Kotlin uses 2-space indentation, max line length 100.
+Spotless enforces ktfmt Google style. Formatting failures break `mvn verify`. Run `mvn spotless:apply` before committing. Kotlin uses 2-space indentation, max line length 100.
 
 ## Tech Stack
 

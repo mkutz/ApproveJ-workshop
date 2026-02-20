@@ -1,0 +1,31 @@
+{
+  "id" : "[uuid 1]",
+  "items" : [ {
+    "id" : "[uuid 2]",
+    "articleId" : "[uuid 3]",
+    "articleNumber" : "[scrubbed 1]",
+    "title" : "Some title",
+    "imageUrl" : "https://approvej.org/images/[uuid 3]",
+    "quantity" : 1,
+    "pricePerUnit" : 299,
+    "priceTotal" : 299,
+    "quantityPerUnitValue" : 100,
+    "quantityTotalValue" : 100,
+    "quantityUnitSymbol" : "g",
+    "insertionTime" : "[isoInstant 1]"
+  }, {
+    "id" : "[uuid 4]",
+    "articleId" : "[uuid 5]",
+    "articleNumber" : "[scrubbed 2]",
+    "title" : "Some title",
+    "imageUrl" : "https://approvej.org/images/[uuid 5]",
+    "quantity" : 1,
+    "pricePerUnit" : 299,
+    "priceTotal" : 299,
+    "quantityPerUnitValue" : 100,
+    "quantityTotalValue" : 100,
+    "quantityUnitSymbol" : "g",
+    "insertionTime" : "[isoInstant 2]"
+  } ],
+  "value" : 598
+}

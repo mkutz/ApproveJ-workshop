@@ -1,0 +1,9 @@
+{
+  "id" : "[uuid 1]",
+  "articleNumber" : "[scrubbed 1]",
+  "title" : "Some title",
+  "description" : "Some description",
+  "imageUrl" : "https://approvej.org/images/[uuid 1]",
+  "pricePerUnit" : 299,
+  "pricePerUnitFormatted" : "2.99 EUR"
+}

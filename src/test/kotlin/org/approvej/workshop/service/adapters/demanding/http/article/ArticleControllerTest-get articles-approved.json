@@ -1,0 +1,25 @@
+[ {
+  "id" : "00000000-0000-0000-0000-000000000001",
+  "articleNumber" : "[scrubbed 1]",
+  "title" : "ACME Rocket",
+  "description" : "Some description",
+  "imageUrl" : "https://approvej.org/images/00000000-0000-0000-0000-000000000001",
+  "pricePerUnit" : 299,
+  "pricePerUnitFormatted" : "2.99 EUR"
+}, {
+  "id" : "00000000-0000-0000-0000-000000000002",
+  "articleNumber" : "[scrubbed 2]",
+  "title" : "ACME Slingshot",
+  "description" : "Some description",
+  "imageUrl" : "https://approvej.org/images/00000000-0000-0000-0000-000000000002",
+  "pricePerUnit" : 299,
+  "pricePerUnitFormatted" : "2.99 EUR"
+}, {
+  "id" : "00000000-0000-0000-0000-000000000003",
+  "articleNumber" : "[scrubbed 3]",
+  "title" : "ACME Dynamite",
+  "description" : "Some description",
+  "imageUrl" : "https://approvej.org/images/00000000-0000-0000-0000-000000000003",
+  "pricePerUnit" : 299,
+  "pricePerUnitFormatted" : "2.99 EUR"
+} ]
