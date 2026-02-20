@@ -1,5 +1,6 @@
 plugins {
   jacoco
+  alias(libs.plugins.approvej)
   alias(libs.plugins.kotlin.jvm)
   alias(libs.plugins.kotlin.spring)
   alias(libs.plugins.spring.boot)
@@ -9,7 +10,10 @@ plugins {
   alias(libs.plugins.spotless)
 }
 
-repositories { mavenCentral() }
+repositories {
+  mavenLocal()
+  mavenCentral()
+}
 
 ext["junit-jupiter.version"] = libs.versions.junit.get()
 
