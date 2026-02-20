@@ -1,0 +1,14 @@
+{
+  "id" : "[uuid 1]",
+  "articleId" : "[uuid 2]",
+  "articleNumber" : "[scrubbed 1]",
+  "title" : "Some title",
+  "imageUrl" : "https://approvej.org/images/[uuid 2]",
+  "quantity" : 1,
+  "pricePerUnit" : 299,
+  "priceTotal" : 299,
+  "quantityPerUnitValue" : 100,
+  "quantityTotalValue" : 100,
+  "quantityUnitSymbol" : "g",
+  "insertionTime" : "[isoInstant 1]"
+}

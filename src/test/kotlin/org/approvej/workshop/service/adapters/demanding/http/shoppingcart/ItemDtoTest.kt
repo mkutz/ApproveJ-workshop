@@ -1,8 +1,11 @@
 package org.approvej.workshop.service.adapters.demanding.http.shoppingcart
 
-import org.approvej.workshop.service.adapters.demanding.http.toCents
+import org.approvej.ApprovalBuilder.approve
+import org.approvej.json.jackson.JsonPrintFormat.json
+import org.approvej.scrub.Scrubbers.isoInstants
+import org.approvej.scrub.Scrubbers.stringsMatching
+import org.approvej.scrub.Scrubbers.uuids
 import org.approvej.workshop.service.application.shoppingcart.ItemBuilder.Companion.anItem
-import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
 class ItemDtoTest {
@@ -13,16 +16,11 @@ class ItemDtoTest {
 
     val dto = ItemDto(item)
 
-    assertThat(dto.id).isEqualTo(item.id.toString())
-    assertThat(dto.articleId).isEqualTo(item.articleId.toString())
-    assertThat(dto.title).isEqualTo(item.title)
-    assertThat(dto.imageUrl).isEqualTo(item.imageUrl)
-    assertThat(dto.quantity).isEqualTo(item.quantity)
-    assertThat(dto.pricePerUnit).isEqualTo(item.pricePerUnit.toCents())
-    assertThat(dto.priceTotal).isEqualTo(item.priceTotal.toCents())
-    assertThat(dto.quantityPerUnitValue).isEqualTo(item.quantityPerUnit.value)
-    assertThat(dto.quantityTotalValue).isEqualTo(item.quantityTotal.value)
-    assertThat(dto.quantityUnitSymbol).isEqualTo(item.quantityPerUnit.unit.symbol)
-    assertThat(dto.insertionTime).isEqualTo(item.insertionTime)
+    approve(dto)
+      .printedAs(json())
+      .scrubbedOf(uuids())
+      .scrubbedOf(stringsMatching("A-[A-Z]{3}-\\d{3}-\\d{3}"))
+      .scrubbedOf(isoInstants())
+      .byFile()
   }
 }

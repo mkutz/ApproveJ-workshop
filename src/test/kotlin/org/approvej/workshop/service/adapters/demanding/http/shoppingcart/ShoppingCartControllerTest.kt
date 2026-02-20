@@ -1,15 +1,17 @@
 package org.approvej.workshop.service.adapters.demanding.http.shoppingcart
 
-import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.module.kotlin.readValue
 import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpRequest.BodyPublishers
 import java.net.http.HttpRequest.newBuilder
 import java.net.http.HttpResponse.BodyHandlers
 import java.util.UUID.randomUUID
+import org.approvej.ApprovalBuilder.approve
+import org.approvej.json.jackson.JsonPrintFormat.json
+import org.approvej.scrub.Scrubbers.isoInstants
+import org.approvej.scrub.Scrubbers.stringsMatching
+import org.approvej.scrub.Scrubbers.uuids
 import org.approvej.workshop.TestcontainersConfiguration
-import org.approvej.workshop.service.adapters.demanding.http.toCents
 import org.approvej.workshop.service.application.article.ArticleBuilder.Companion.anArticle
 import org.approvej.workshop.service.application.article.ToStoreArticles
 import org.approvej.workshop.service.application.shoppingcart.ItemBuilder.Companion.anItem
@@ -28,7 +30,6 @@ class ShoppingCartControllerTest(
   @param:Value($$"http://localhost:${local.server.port}") val baseUrl: String,
   @param:Autowired val shoppingCartStore: ToStoreShoppingCarts,
   @param:Autowired val articleStore: ToStoreArticles,
-  @param:Autowired val objectMapper: ObjectMapper,
 ) {
 
   val httpClient: HttpClient = HttpClient.newHttpClient()
@@ -42,11 +43,13 @@ class ShoppingCartControllerTest(
       )
 
     assertThat(response.statusCode()).isEqualTo(200)
-    val receivedShoppingCart = objectMapper.readValue<ShoppingCartDto>(response.body())
-    assertThat(receivedShoppingCart).isNotNull()
-    assertThat(receivedShoppingCart.id).isNotNull()
-    assertThat(receivedShoppingCart.value).isEqualTo(0)
-    assertThat(receivedShoppingCart.items).isEmpty()
+
+    approve(response.body())
+      .printedAs(json())
+      .scrubbedOf(uuids())
+      .scrubbedOf(stringsMatching("A-[A-Z]{3}-\\d{3}-\\d{3}"))
+      .scrubbedOf(isoInstants())
+      .byFile()
   }
 
   @Test
@@ -63,32 +66,13 @@ class ShoppingCartControllerTest(
       )
 
     assertThat(response.statusCode()).isEqualTo(200)
-    val receivedShoppingCart = objectMapper.readValue<ShoppingCartDto>(response.body())
-    assertThat(receivedShoppingCart).isNotNull()
-    assertThat(receivedShoppingCart.id).isEqualTo(existingShoppingCart.id.toString())
-    assertThat(receivedShoppingCart.value).isPositive()
-    val receivedItems = receivedShoppingCart.items
-    assertThat(receivedItems).hasSize(2)
-    assertThat(receivedItems[0].id).isEqualTo(existingShoppingCart.items[0].id.toString())
-    assertThat(receivedItems[0].articleId)
-      .isEqualTo(existingShoppingCart.items[0].articleId.toString())
-    assertThat(receivedItems[0].title).isEqualTo(existingShoppingCart.items[0].title)
-    assertThat(receivedItems[0].imageUrl).isEqualTo(existingShoppingCart.items[0].imageUrl)
-    assertThat(receivedItems[0].quantity).isEqualTo(existingShoppingCart.items[0].quantity)
-    assertThat(receivedItems[0].pricePerUnit)
-      .isEqualTo(existingShoppingCart.items[0].pricePerUnit.toCents())
-    assertThat(receivedItems[0].priceTotal)
-      .isEqualTo(existingShoppingCart.items[0].priceTotal.toCents())
-    assertThat(receivedItems[1].id).isEqualTo(existingShoppingCart.items[1].id.toString())
-    assertThat(receivedItems[1].articleId)
-      .isEqualTo(existingShoppingCart.items[1].articleId.toString())
-    assertThat(receivedItems[1].title).isEqualTo(existingShoppingCart.items[1].title)
-    assertThat(receivedItems[1].imageUrl).isEqualTo(existingShoppingCart.items[1].imageUrl)
-    assertThat(receivedItems[1].quantity).isEqualTo(existingShoppingCart.items[1].quantity)
-    assertThat(receivedItems[1].pricePerUnit)
-      .isEqualTo(existingShoppingCart.items[1].pricePerUnit.toCents())
-    assertThat(receivedItems[1].priceTotal)
-      .isEqualTo(existingShoppingCart.items[1].priceTotal.toCents())
+
+    approve(response.body())
+      .printedAs(json())
+      .scrubbedOf(uuids())
+      .scrubbedOf(stringsMatching("A-[A-Z]{3}-\\d{3}-\\d{3}"))
+      .scrubbedOf(isoInstants())
+      .byFile()
   }
 
   @Test
@@ -120,19 +104,13 @@ class ShoppingCartControllerTest(
       )
 
     assertThat(response.statusCode()).isEqualTo(200)
-    val receivedShoppingCart = objectMapper.readValue<ShoppingCartDto>(response.body())
-    assertThat(receivedShoppingCart).isNotNull()
-    assertThat(receivedShoppingCart.id).isEqualTo(existingShoppingCart.id.toString())
-    assertThat(receivedShoppingCart.value).isEqualTo(article.pricePerUnit.toCents() * quantity)
-    assertThat(receivedShoppingCart.items).hasSize(1)
-    assertThat(receivedShoppingCart.items[0].id).isNotNull()
-    assertThat(receivedShoppingCart.items[0].articleId).isEqualTo(article.id.toString())
-    assertThat(receivedShoppingCart.items[0].title).isEqualTo(article.title)
-    assertThat(receivedShoppingCart.items[0].imageUrl).isEqualTo(article.imageUrl)
-    assertThat(receivedShoppingCart.items[0].quantity).isEqualTo(quantity)
-    assertThat(receivedShoppingCart.items[0].pricePerUnit).isEqualTo(article.pricePerUnit.toCents())
-    assertThat(receivedShoppingCart.items[0].priceTotal)
-      .isEqualTo(article.pricePerUnit.toCents() * quantity)
+
+    approve(response.body())
+      .printedAs(json())
+      .scrubbedOf(uuids())
+      .scrubbedOf(stringsMatching("A-[A-Z]{3}-\\d{3}-\\d{3}"))
+      .scrubbedOf(isoInstants())
+      .byFile()
   }
 
   @Test

@@ -1,14 +1,14 @@
 package org.approvej.workshop.service.adapters.demanding.http.article
 
-import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.module.kotlin.readValue
 import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpRequest.newBuilder
 import java.net.http.HttpResponse
 import java.util.UUID
+import org.approvej.ApprovalBuilder.approve
+import org.approvej.json.jackson.JsonPrintFormat.json
+import org.approvej.scrub.Scrubbers.stringsMatching
 import org.approvej.workshop.TestcontainersConfiguration
-import org.approvej.workshop.service.adapters.demanding.http.toCents
 import org.approvej.workshop.service.application.article.ArticleBuilder.Companion.anArticle
 import org.approvej.workshop.service.application.article.ToStoreArticles
 import org.assertj.core.api.Assertions.assertThat
@@ -23,7 +23,6 @@ import org.springframework.context.annotation.Import
 class ArticleControllerTest(
   @param:Value($$"http://localhost:${local.server.port}") val baseUrl: String,
   @param:Autowired val articleStore: ToStoreArticles,
-  @param:Autowired val objectMapper: ObjectMapper,
 ) {
 
   val httpClient: HttpClient = HttpClient.newHttpClient()
@@ -60,25 +59,10 @@ class ArticleControllerTest(
       )
 
     assertThat(response.statusCode()).isEqualTo(200)
-    val receivedArticles = objectMapper.readValue<List<ArticleDto>>(response.body())
-    assertThat(receivedArticles).hasSameSizeAs(matchingArticles)
-    assertThat(receivedArticles[0].id).isEqualTo(matchingArticles[0].id.toString())
-    assertThat(receivedArticles[0].title).isEqualTo(matchingArticles[0].title)
-    assertThat(receivedArticles[0].description).isEqualTo(matchingArticles[0].description)
-    assertThat(receivedArticles[0].imageUrl).isEqualTo(matchingArticles[0].imageUrl)
-    assertThat(receivedArticles[0].pricePerUnit)
-      .isEqualTo(matchingArticles[0].pricePerUnit.toCents())
-    assertThat(receivedArticles[1].id).isEqualTo(matchingArticles[1].id.toString())
-    assertThat(receivedArticles[1].title).isEqualTo(matchingArticles[1].title)
-    assertThat(receivedArticles[1].description).isEqualTo(matchingArticles[1].description)
-    assertThat(receivedArticles[1].imageUrl).isEqualTo(matchingArticles[1].imageUrl)
-    assertThat(receivedArticles[1].pricePerUnit)
-      .isEqualTo(matchingArticles[1].pricePerUnit.toCents())
-    assertThat(receivedArticles[2].id).isEqualTo(matchingArticles[2].id.toString())
-    assertThat(receivedArticles[2].title).isEqualTo(matchingArticles[2].title)
-    assertThat(receivedArticles[2].description).isEqualTo(matchingArticles[2].description)
-    assertThat(receivedArticles[2].imageUrl).isEqualTo(matchingArticles[2].imageUrl)
-    assertThat(receivedArticles[2].pricePerUnit)
-      .isEqualTo(matchingArticles[2].pricePerUnit.toCents())
+
+    approve(response.body())
+      .printedAs(json())
+      .scrubbedOf(stringsMatching("A-[A-Z]{3}-\\d{3}-\\d{3}"))
+      .byFile()
   }
 }
