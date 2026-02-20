@@ -11,7 +11,8 @@ Workshop material for learning ApproveJ.org.
 In order to fulfill the following objectives, you will need
 
 - The contents of this repository,
-- JDK 21 installed on your system, and
+- JDK 21 installed on your system,
+- Docker (required for integration tests that use [Testcontainers](https://www.testcontainers.org/)), and
 - an IDE like IntelliJ IDEA
 
 
