@@ -4,7 +4,7 @@ assertj = "3.27.7"
 jackson = "2.21.0"
 junit = "6.0.3"
 kotlin = "2.3.10"
-springBoot = "3.5.7"
+springBoot = "4.0.3"
 springDependencyManagement = "1.1.7"
 testcontainers = "1.21.4"
 
