@@ -1,5 +1,6 @@
 plugins {
   jacoco
+  alias(libs.plugins.approvej)
   alias(libs.plugins.kotlin.jvm)
   alias(libs.plugins.kotlin.spring)
   alias(libs.plugins.spring.boot)
