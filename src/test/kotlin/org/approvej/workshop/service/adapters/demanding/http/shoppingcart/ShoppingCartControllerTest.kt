@@ -7,6 +7,7 @@ import java.net.http.HttpRequest.newBuilder
 import java.net.http.HttpResponse.BodyHandlers
 import java.util.UUID.randomUUID
 import org.approvej.ApprovalBuilder.approve
+import org.approvej.ApprovalTest
 import org.approvej.json.jackson.JsonPrintFormat.json
 import org.approvej.scrub.Scrubbers.isoInstants
 import org.approvej.scrub.Scrubbers.stringsMatching
@@ -24,6 +25,7 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.context.annotation.Import
 
+@ApprovalTest
 @Import(TestcontainersConfiguration::class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class ShoppingCartControllerTest(
