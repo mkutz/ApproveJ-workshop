@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
   jacoco
   alias(libs.plugins.approvej)
@@ -26,7 +28,6 @@ dependencies {
   runtimeOnly(libs.postgresql)
 
   testImplementation(libs.approvej.json.jackson)
-  testImplementation(libs.approvej.yaml.jackson)
   testImplementation(libs.assertj.core)
   testImplementation(libs.awaitility.kotlin)
   testImplementation(libs.datasource.proxy)
@@ -81,3 +82,7 @@ spotless {
     ktfmt().googleStyle()
   }
 }
+
+val compileTestKotlin: KotlinCompile by tasks
+
+compileTestKotlin.compilerOptions { freeCompilerArgs.set(listOf("-Xmulti-dollar-interpolation")) }

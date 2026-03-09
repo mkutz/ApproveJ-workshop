@@ -44,6 +44,7 @@ class ShoppingCartControllerTest(
 
     assertThat(response.statusCode()).isEqualTo(200)
     approve(response.body()).scrubbedOf(uuids()).printedAs(json()).byFile()
+    approve(response.body()).scrubbedOf(uuids()).printedAs(json()).named("TODO").byFile()
   }
 
   @Test
