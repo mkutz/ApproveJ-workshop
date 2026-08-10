@@ -28,7 +28,7 @@ jobs:
           java-version: 21
           distribution: temurin
 
-      - uses: gradle/actions/setup-gradle@b128da9bf0c2651a9fe51856df98ba6e611afc58
+      - uses: gradle/actions/setup-gradle@889dc537cf3672c0c060560c9ead940a2b8b7077
 
       - run: ./gradlew check
 
