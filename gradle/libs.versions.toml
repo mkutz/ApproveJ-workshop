@@ -36,7 +36,7 @@ approvej = { id = "org.approvej", version.ref = "approvej" }
 kotlin-jpa = { id = "org.jetbrains.kotlin.plugin.jpa", version.ref = "kotlin" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-spring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "kotlin" }
-sonar = { id = "org.sonarqube", version = "7.4.0.8496" }
+sonar = { id = "org.sonarqube", version = "7.5.0.8588" }
 spotless = { id = "com.diffplug.spotless", version = "7.2.1" }
 spring-boot = { id = "org.springframework.boot", version.ref = "springBoot" }
 spring-dependency-management = { id = "io.spring.dependency-management", version.ref = "springDependencyManagement" }
